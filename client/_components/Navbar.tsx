@@ -3,6 +3,7 @@
 import { UserIcon, Bars3Icon } from "@heroicons/react/24/solid"
 
 export default function Navbar() {
+
     return (
         <div className="fixed top-0 navbar bg-base-100 z-10 shadow-sm shadow-white/10">
             <div className="navbar-start">

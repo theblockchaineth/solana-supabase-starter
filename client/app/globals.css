@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 @import "tailwindcss";
-@import "tailwindcss";
+
+@theme {
+  --font-special: "Special Elite";
+}
 
 @plugin "daisyui" {
     themes: black --default;
   }
-
-@theme {
-    --font-special: "Special Elite", sans-serif;
-}
