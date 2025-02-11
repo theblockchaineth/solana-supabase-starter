@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+
+import AppWalletProvider from "@/_components/AppWalletProvider";
 import Navbar from "@/_components/Navbar";
 
 export const metadata: Metadata = {
@@ -17,8 +19,10 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
+        <AppWalletProvider>
           <Navbar />
           {children}
+        </AppWalletProvider>
       </body>
     </html>
   );

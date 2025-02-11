@@ -1,22 +1,8 @@
-import { signIn } from "@/auth"
- 
+import Splash from "@/_components/Splash"
+
+
 export default function Home() {
   return (
-    <form className="mt-16"
-      action={async (formData) => {
-        "use server"
-        await signIn("credentials", formData)
-      }}
-    >
-      <label>
-        Email
-        <input name="email" type="email" />
-      </label>
-      <label>
-        Password
-        <input name="password" type="password" />
-      </label>
-      <button>Sign In</button>
-    </form>
+    <Splash />
   )
 }

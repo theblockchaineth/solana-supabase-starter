@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import "@solana/wallet-adapter-react-ui/styles.css";
 @import "tailwindcss";
 
 @theme {
@@ -8,3 +9,5 @@
 @plugin "daisyui" {
     themes: black --default;
   }
+
+  

@@ -1,8 +1,19 @@
 "use client"
 
-import { UserIcon, Bars3Icon } from "@heroicons/react/24/solid"
+import { Bars3Icon, UserIcon } from "@heroicons/react/24/solid"
+import { useState, useEffect } from "react";
+import ConnectButton from "./ConnectButton";
 
 export default function Navbar() {
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, []);
+
+
+    if (loading) return null;
 
     return (
         <div className="fixed top-0 navbar bg-base-100 z-10 shadow-sm shadow-white/10">
@@ -24,9 +35,7 @@ export default function Navbar() {
                 <a className="text-xl font-special pt-2 tracking-wider">findmykiller</a>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-ghost btn-circle">
-                    <UserIcon className="h-5 w-5" />
-                </button>
+                <ConnectButton />
             </div>
         </div>
     );
