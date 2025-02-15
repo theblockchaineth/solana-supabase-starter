@@ -6,7 +6,10 @@ The purpose of this document is to simplify session management and the ability t
 2. Run in the supabase/* migration and schema SQL against the new database
 3. Add a client/.env file (for local development) referencing the variables in .example.env
 4. Take a poke around and understand it..
-5. Run it locally >> npm run dev (wihtin the client directory)
+5. Run it locally: 
+   1. >> cd client
+   2. >> npm install
+   3. >> npm run dev 
 6. Push it to vercel and add environment variables as per #3
 
 

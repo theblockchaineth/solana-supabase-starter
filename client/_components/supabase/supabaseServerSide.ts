@@ -3,9 +3,7 @@ import { cookies } from 'next/headers';
 
 export async function createClient() {
   const cookieStore = await cookies();
-  const auth_cookie = cookieStore.get(process.env.SUPABASE_TOKEN_COOKIENAME!)
-
-  console.log(auth_cookie?.value)
+  const auth_cookie = cookieStore.get(process.env.NEXT_PUBLIC_SUPABASE_TOKEN_COOKIENAME!)
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

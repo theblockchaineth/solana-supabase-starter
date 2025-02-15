@@ -8,6 +8,9 @@ import verifySIWS from "./_server/verifySIWS"
 import type { SolanaSignInInput } from "@solana/wallet-standard-features"
 import { cookies } from 'next/headers'
 
+import createNewUserData from "./_server/createNewUser"
+import { supabaseAdminClient } from "./_components/supabase/supabaseAdminClient"
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
 
@@ -40,6 +43,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: (credentials.accountAddress as string).replace('"', ''),
             name: (credentials.accountAddress as string).replace('"', ''),
           }
+
+          const newUser = createNewUserData(credentials.accountAddress as string)
+          await supabaseAdminClient.from('wallets').upsert([newUser], { onConflict: 'wallet', ignoreDuplicates: true })
+
           return user
         }
       }

@@ -23,7 +23,5 @@ export default async function verifySIWS(
       signature: new Uint8Array(bs58.decode(signature)),
       signedMessage: new Uint8Array(bs58.decode(signedMessage)),
     };
-
-    console.log(input, output);
     return verifySignIn(input, output);
   }

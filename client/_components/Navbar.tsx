@@ -1,6 +1,6 @@
 "use client"
 
-import { Bars3Icon, UserIcon } from "@heroicons/react/24/solid"
+import { Bars3Icon } from "@heroicons/react/24/solid"
 import { useState, useEffect } from "react";
 import ConnectButton from "./ConnectButton";
 
@@ -25,14 +25,15 @@ export default function Navbar() {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>Homepage</a></li>
-                        <li><a>Portfolio</a></li>
-                        <li><a>About</a></li>
+                        <li><a>Dummy</a></li>
+                        <li><a>Drop</a></li>
+                        <li><a>Down</a></li>
+                        <li><a>Menu</a></li>
                     </ul>
                 </div>
             </div>
             <div className="navbar-center">
-                <a className="text-xl font-special pt-2 tracking-wider">findmykiller</a>
+                <a className="text-xl font-special pt-2 tracking-wider">solana x nextauth x supabase </a>
             </div>
             <div className="navbar-end">
                 <ConnectButton />

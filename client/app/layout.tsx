@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import AppWalletProvider from "@/_components/AppWalletProvider";
+import AppWalletProvider from "@/_components/providers/AppWalletProvider";
 import Navbar from "@/_components/Navbar";
 
 export const metadata: Metadata = {

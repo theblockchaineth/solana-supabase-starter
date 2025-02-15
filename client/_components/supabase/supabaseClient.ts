@@ -5,7 +5,7 @@ import { useCookies } from 'next-client-cookies';
 
 export function createClient() {
   const cookies = useCookies();
-  const auth_cookie = cookies.get(process.env.SUPABASE_TOKEN_COOKIENAME!)
+  const auth_cookie = cookies.get(process.env.NEXT_PUBLIC_SUPABASE_TOKEN_COOKIENAME!)
 
   if(!auth_cookie) {
     return createBrowserClient(
