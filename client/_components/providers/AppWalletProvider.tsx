@@ -50,10 +50,6 @@ export default function AppWalletProvider({
 
   }, []);
 
-  useEffect(() => {
-
-  }, []);
-
   return (
     <SessionProvider>
       <ConnectionProvider endpoint={endpoint}>
