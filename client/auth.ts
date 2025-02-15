@@ -1,9 +1,12 @@
 import NextAuth from "next-auth"
+import { SignJWT } from 'jose'
+
 import Credentials from "next-auth/providers/credentials"
 import type { User } from "next-auth"
+
 import verifySIWS from "./_server/verifySIWS"
-import type { SolanaSignInInput, SolanaSignInOutput } from "@solana/wallet-standard-features"
-import { decode } from "bs58"
+import type { SolanaSignInInput } from "@solana/wallet-standard-features"
+import { cookies } from 'next/headers'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -11,15 +14,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Credentials({
       credentials: {
         domain: { label: "Domain", type: "text" },
-        nonce: { label: "Nonce", type: "text"  },
-        accountAddress: { label: "Account Address", type: "text"  },
-        signature: { label: "Signature", type: "text"  },
-        signedMessage: { label: "Signed Message", type: "text"  }
+        nonce: { label: "Nonce", type: "text" },
+        accountAddress: { label: "Account Address", type: "text" },
+        signature: { label: "Signature", type: "text" },
+        signedMessage: { label: "Signed Message", type: "text" }
       },
 
       authorize: async (credentials) => {
-
-        console.log("credentials", credentials)
 
         if (!credentials) {
           throw new Error("Invalid credentials.")
@@ -32,32 +33,45 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const results = await verifySIWS(credentialsIn, credentials.accountAddress as string, credentials.signature as string, credentials.signedMessage as string)
 
-        if(!results) {
+        if (!results) {
           throw new Error("Invalid credentials.")
         } else {
           const user: User = {
-            id: credentials.accountAddress as string
-            }
-          console.log("user", user)  
+            id: (credentials.accountAddress as string).replace('"', ''),
+            name: (credentials.accountAddress as string).replace('"', ''),
+          }
           return user
         }
       }
     })
-  ], 
+  ],
   session: {
     strategy: "jwt",
   },
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
+    async session({ session, token }) {
+      const signingSecret = process.env.SUPABASE_JWT_SECRET
+
+      if (signingSecret) {
+        const payload = {
+          aud: "authenticated",
+          exp: Math.floor(new Date(session.expires).getTime() / 1000),
+          sub: token.name as string || "",
+          id: token.name,
+          role: "authenticated"
+        }
+        session.user = { name: token.name as string, id: token.name as string, email: token.email as string }
+        session.supabaseAccessToken = await new SignJWT(payload)
+          .setProtectedHeader({ alg: 'HS256' })
+          .sign(new TextEncoder().encode(signingSecret))
       }
-      return token
-    },
-    session({ session, token }) {
-      session.id = token.id as string
+      
+      if(session.supabaseAccessToken) {
+        const cookieStore = await cookies()
+        cookieStore.set('SUPABASE_AUTH_TOKEN', session.supabaseAccessToken, { secure: true })
+      }
+
       return session
     },
   },
 });
-        

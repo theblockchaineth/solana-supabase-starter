@@ -1,14 +1,20 @@
-"use client";
+import { createClient } from "./supabase/supabaseServerSide"; 
 
-import { useSession } from "next-auth/react";
+async function getPageData() {
+    const supabase = await createClient()
+    const userdata = await supabase.from('wallets').select();
+    const data = userdata?.data
+    if(data) return data[0]
+    return null
+}
 
-export default function Splash() {
-    const { data: session } = useSession();
+export default async function Splash() {
+
+    const pageData = await getPageData();
+    console.log(pageData);
     
     return (
         <div className="flex items-center justify-center h-screen">
-        <div className="text-3xl font-bold">Welcome to the Splash Page</div>
-        <div className="text-3xl font-bold">Session: {session ? JSON.stringify(session) : "No session"}</div>
-        </div>
+        <div className="text-3xl font-bold">Welcome to the Splash Page</div> </div>
     );
     }

@@ -1,6 +1,6 @@
 import { SolanaSignInInput } from "@solana/wallet-standard-features";
 
-export default async function createSignInData() {
+export async function createSignInData() {
 
     const domain = "example.com";
     const signInData: SolanaSignInInput = {

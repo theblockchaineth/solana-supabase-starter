@@ -1,6 +1,6 @@
 "use client";
  
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -9,17 +9,17 @@ import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import { SessionProvider } from "next-auth/react";
-import createSignInData from "@/_server/createSignInData";
+import { createSignInData } from "@/_server/createSignInData";
 import { encode } from "bs58";
 import { signIn } from "next-auth/react";
 import type { Adapter } from "@solana/wallet-adapter-base";
+import { WalletSessionSyncProvider } from "@/_components/WalletSessionSyncProvider";
  
 export default function AppWalletProvider({
     children,
   }: {
     children: React.ReactNode;
   }) {
-
     const network = WalletAdapterNetwork.Devnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
     const wallets = useMemo(
@@ -27,6 +27,8 @@ export default function AppWalletProvider({
       ],
       [network],
     );
+
+
 
     const autoSignIn = useCallback(async (adapter: Adapter) => {
 
@@ -49,12 +51,20 @@ export default function AppWalletProvider({
       return false;
       
     }, []);
+
+    useEffect(() => {
+
+    }, []);
    
     return (
       <SessionProvider>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect={autoSignIn}>
-            <WalletModalProvider>{children}</WalletModalProvider>
+            <WalletModalProvider>
+              <WalletSessionSyncProvider>
+                {children}
+              </WalletSessionSyncProvider>
+            </WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>
       </SessionProvider>
