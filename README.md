@@ -3,7 +3,7 @@ The purpose of this document is to simplify session management and the ability t
 
 ## Getting started
 1. Set up a Supabase Database Project
-2. Run in the supabase/* migration and schema SQL against the new database
+2. Run in the supabase/* migration and schema against the new database
 3. Add a client/.env file (for local development) referencing the variables in .example.env
 4. Take a poke around and understand it..
 5. Run it locally: 
