@@ -11,5 +11,5 @@ The purpose of this document is to simplify session management and the ability t
 
 
 ##Tip Jar 
-SOL: EZCZ2Dt5pEDEAH8V3V8qwdH68RrGaXW5sYLGg3d1dBdY
-ETH: theblockchain.eth
+1. SOL: EZCZ2Dt5pEDEAH8V3V8qwdH68RrGaXW5sYLGg3d1dBdY
+2. ETH: theblockchain.eth
