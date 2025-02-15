@@ -2,7 +2,8 @@ import { SolanaSignInInput } from "@solana/wallet-standard-features";
 
 export async function createSignInData() {
 
-    const domain = "example.com";
+    const domain = process.env.NEXT_PUBLIC_WEBSITE_DOMAIN!;
+    
     const signInData: SolanaSignInInput = {
         domain,
         nonce: "1000010000",

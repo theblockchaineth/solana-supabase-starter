@@ -36,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const results = await verifySIWS(credentialsIn, credentials.accountAddress as string, credentials.signature as string, credentials.signedMessage as string)
 
-        if (!results) {
+        if (!results || credentialsIn.domain !== process.env.NEXT_PUBLIC_WEBSITE_DOMAIN) {
           throw new Error("Invalid credentials.")
         } else {
           const user: User = {
