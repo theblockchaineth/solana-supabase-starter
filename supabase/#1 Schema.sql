@@ -10,7 +10,7 @@ ALTER TABLE public.wallets ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can select their own records"
 on "public"."wallets"
 to public
-using (7
+using (
   (((current_setting('request.jwt.claims'::text, true))::json ->> 'sub'::text) = wallet)
 
 );
