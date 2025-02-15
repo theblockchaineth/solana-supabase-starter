@@ -10,6 +10,6 @@ The purpose of this document is to simplify session management and the ability t
 6. Push it to vercel and add environment variables as per #3
 
 
-##Tip Jar 
+## Tip Jar 
 1. SOL: EZCZ2Dt5pEDEAH8V3V8qwdH68RrGaXW5sYLGg3d1dBdY
 2. ETH: theblockchain.eth
