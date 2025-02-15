@@ -6,6 +6,7 @@ export async function createSignInData() {
     
     const signInData: SolanaSignInInput = {
         domain,
+        // TODO: Update to a csrf
         nonce: "1000010000",
       };
 
